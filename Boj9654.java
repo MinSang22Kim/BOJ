@@ -1,5 +1,5 @@
 
-public class BOJ9654 {
+public class Boj9654 {
 	public static void main(String[] args) {
 		System.out.println("SHIP NAME      CLASS          DEPLOYMENT IN SERVICE\n"
 				+ "N2 Bomber      Heavy Fighter  Limited    21        \n"
