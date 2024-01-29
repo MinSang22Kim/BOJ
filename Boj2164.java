@@ -19,15 +19,12 @@ public class Boj2164 {
 			q.add(i);
 		}
 
-		while (q.size() >= 1) {
-			if (q.size() == 1) {
-				bw.write(Integer.toString(q.poll()));
-				break;
-			}
-			q.remove();
+		while (q.size() > 1) {
+			q.poll();
 			q.add(q.poll());
 		}
 
+		bw.write(Integer.toString(q.poll()));
 		bw.flush();
 		bw.close();
 	}
