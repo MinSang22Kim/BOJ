@@ -1,59 +1,42 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.util.ArrayList;
-import java.util.StringTokenizer;
+import java.util.Scanner;
 
 public class Boj11742 {
-	static ArrayList<Integer>[] A;
-	static boolean visited[];
+	static int N, M, cnt; // 정점, 간선, 연결요소개수
+	static boolean[][] graph;
+	static boolean[] visit; // 방문 여부 체크
 
-	public static void DFS(int v) {
-		if (visited[v])
-			return; // 현재 노드가 방문노드이면 탐색X
-		visited[v] = true;
-		for (int i : A[v]) {
-			if (!visited[i])
-				DFS(i);
+	public static void dfs(int i) {
+		visit[i] = true;
+		for (int j = 1; j <= N; j++) {
+			if (graph[i][j] == true && visit[j] == false) {
+				dfs(j);
+			}
 		}
-	}
+	} // 정점 i를 방문하고 갈 수 있는 모든 정점에 대해 재귀적으로 dfs 호출
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringTokenizer st = new StringTokenizer(br.readLine());
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
 
-		int n = Integer.parseInt(st.nextToken());
-		int m = Integer.parseInt(st.nextToken());
+		N = scan.nextInt();
+		M = scan.nextInt();
+		graph = new boolean[N + 1][N + 1];
+		visit = new boolean[N + 1];
 
-		visited = new boolean[n + 1];
-		A = new ArrayList[n + 1];
-
-		for (int i = 1; i < n + 1; i++) {
-			A[i] = new ArrayList<Integer>();
-		}
-
-		for (int i = 0; i < m; i++) {
-			st = new StringTokenizer(br.readLine());
-			int start = Integer.parseInt(st.nextToken());
-			int end = Integer.parseInt(st.nextToken());
-			A[start].add(end);
-			A[end].add(start);
-			// 방향성이 없는 그래프이기 때문
+		for (int i = 1; i <= M; i++) {
+			int a = scan.nextInt();
+			int b = scan.nextInt();
+			graph[a][b] = true;
+			graph[b][a] = true;
 		}
 
-		int cnt = 0;
-		for (int i = 1; i < n + 1; i++) {
-			if (!visited[i]) {
+		for (int i = 1; i <= N; i++) {
+			if (!visit[i]) {
 				cnt++;
-				DFS(i);
+				dfs(i);
 			}
 		}
 
-		bw.write(Integer.toString(cnt));
-		bw.flush();
-		bw.close();
+		System.out.println(cnt);
+		scan.close();
 	}
 }
