@@ -18,7 +18,7 @@ public class Boj4153 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		int[] arr =® new int[3];
+		int[] arr = new int[3];
 
 		while (true) {
 			StringTokenizer st = new StringTokenizer(br.readLine(), " ");
