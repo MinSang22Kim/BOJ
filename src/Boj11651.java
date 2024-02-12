@@ -23,9 +23,8 @@ public class Boj11651 {
 		Arrays.sort(arr, (e1, e2) -> {
 			if (e1[1] == e2[1])
 				return e1[0] - e2[0];
-			else {
+			else
 				return e1[1] - e2[1];
-			}
 		});
 
 		for (int i = 0; i < N; i++) {
